@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+
+html {
+    max-width: calc((var(--vw, 1vw) * 100));
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+@import "~@angular/material/theming";
+$angular-primary: mat-palette($mat-indigo, 500, 100, 900);
+$angular-accent: mat-palette($mat-pink, A200, A100, A400);
+$angular-warn: mat-palette($mat-red);
+$angular-default-theme: mat-light-theme(
+    (
+        color: (
+            primary: $angular-primary,
+            accent: $angular-accent,
+            warn: $angular-warn,
+        ),
+    )
+);
+
+$custom-typography: mat-typography-config(
+    $font-family:
+        "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+);
+
+@include angular-material-theme($angular-default-theme);

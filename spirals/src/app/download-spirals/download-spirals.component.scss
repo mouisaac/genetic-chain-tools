@@ -1,0 +1,31 @@
+.canvas-container {
+    margin: auto;
+    display:block;
+    text-align: center;
+    width: 100%;
+}
+
+.download-button {
+    margin: auto;
+}
+
+.form-error {
+    font-size: 10px;
+    color: #f44336;
+}
+
+.inline {
+    display: inline;
+}
+
+@media screen and (max-width: 767px) {
+    mat-form-field {
+        width: 145px;
+    }
+}
+
+@media screen and (max-width: 416px) {
+    mat-form-field {
+        width: 75px;
+    }
+}

@@ -1,0 +1,95 @@
+<!-- Toolbar -->
+<div class="toolbar" id="main-header" role="banner">
+  <div class="logo-container">
+    <a aria-label="Logo" target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCRM6h41jul1p_lgJ7xETKnw" title="Logo">
+      <img class="mou-logo" id="mou-logo" width="40" alt="MOU Logo" src="{{ domain }}/logos/1x1x1_MOU.png" />
+    </a>
+  </div>
+
+  <mat-toolbar-row>
+    <span class="toolbar-title">SPIRAL GIF DOWNLOADER</span>
+  </mat-toolbar-row>
+
+  <div class="spacer"></div>
+  <a aria-label="Logo" target="_blank" rel="noopener" href="https://geneticchain.io/" title="Logo">
+    <img src="{{ domain }}/logos/gc-black-white-1080px.png" id="main-logo" height="50">
+  </a>
+
+</div>
+
+<mat-card class="content" role="main">
+  <!--img src="{{ domain }}/logos/gc-black-white-1080px.png" height="100"-->
+  <div class="version">v1.0.0 <span class="version-date">(20211001)</span></div>
+  <div id="top-section" #topSection></div>
+
+  <router-outlet></router-outlet>
+
+</mat-card>
+
+<mat-toolbar class="footer-container" role="footer">
+
+  <!-- Back to Top -->
+  <mat-toolbar-row id="back-to-top-container">
+    <span fxFlex></span>
+    <a class="circle-link" title="Back to top" (click)="topSection.scrollIntoView({ behavior: 'smooth' })">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+        focusable="false" width="50" height="50"
+        style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+        preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+        <g transform="translate(24.5 0) scale(-1 1)">
+          <path
+            d="M13 5.586l-4.707 4.707a.999.999 0 1 0 1.414 1.414L12 9.414V17a1 1 0 1 0 2 0V9.414l2.293 2.293a.997.997 0 0 0 1.414 0a.999.999 0 0 0 0-1.414L13 5.586z"
+            fill="#626262" />
+        </g>
+      </svg>
+    </a>
+    <span fxFlex></span>
+  </mat-toolbar-row>
+
+  <!-- Footer -->
+  <mat-toolbar-row class="footer">
+    <span fxFlex></span>
+    Love this app?&nbsp;
+    <a href="https://github.com/mouisaac/" target="_blank" rel="noopener" color="accent" class="footer-link"> Follow me
+      on github
+      <div class="github-star-badge">
+        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+        </svg>
+        Star
+      </div>
+    </a>
+    <a href="https://github.com/mouisaac/" target="_blank" rel="noopener" class="footer-link">
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#1976d2" />
+        <path d="M0 0h24v24H0z" fill="none" />
+      </svg>
+    </a>
+
+    Or Twitter&nbsp;
+    <div class="logo-container">
+      <a aria-label="twitter" target="_blank" rel="noopener" href="https://www.twitter.com/mouisaac" title="twitter">
+        @mouisaac
+      </a>
+    </div>
+
+    <span fxFlex></span>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<!--button (click)="spinner.show();">TEST NGX-SPINNER</button-->
+<!--ngx-spinner [bdColor]="'rgba(241, 241, 241, 0.7)'" [color]="'rgb(22,87,136)'" [type]="'ball-scale-ripple-multiple'"
+  #ngxSpinner [size]="'medium'" name="global" template="<div style='text-align: center;'>
+      <img src='{{ domain }}/animated/g11dance_rb.gif' height='180px'
+      style='-webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -o-user-select: none;
+      user-select: none;' />
+    </div>">
+</ngx-spinner-->
+<ng-http-loader [backgroundColor]="'#165788'" spinner="sk-three-bounce">
+</ng-http-loader>

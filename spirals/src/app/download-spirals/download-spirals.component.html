@@ -1,0 +1,162 @@
+<mat-card-content>
+
+    <form name="form" novalidate>
+        <div fxLayoutAlign="center">
+            <mat-form-field id="spiral-algo-field">
+                <mat-label class="form-label">
+                    Algorithm
+                </mat-label>
+                <input matInput type="text" name="algo" [(ngModel)]="spiralMetadataForm.algo" #algo="ngModel" readonly>
+            </mat-form-field>
+            <div fxFlex="4%"></div>
+            <mat-form-field id="spiral-pallete-field">
+                <mat-label class="form-label">
+                    Pallete
+                </mat-label>
+                <input matInput type="text" name="pallete" [(ngModel)]="spiralMetadataForm.pallete" #pallete="ngModel"
+                    readonly>
+            </mat-form-field>
+            <div fxFlex="4%"></div>
+            <mat-form-field id="spiral-bg-field">
+                <mat-label class="form-label">
+                    Background
+                </mat-label>
+                <input matInput type="text" name="bg" [(ngModel)]="spiralMetadataForm.bg" #bg="ngModel" readonly>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div id="canvas-container">
+    </div>
+
+    <br>
+
+    <div fxLayout="row wrap" fxlayoutalign="center">
+
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit('resize')" #f="ngForm" novalidate fxFlex="60%"
+            fxFlex.lt-sm="100%" fxFlex.gt-sm="60%">
+            <div>
+                <mat-form-field id="canvas-width-field">
+                    <mat-label class="form-label">
+                        Width ({{minCanvasWidth}}-{{maxCanvasWidth}})
+                    </mat-label>
+                    <input matInput type="number" name="width" [(ngModel)]="resizeForm.width" #width="ngModel">
+                </mat-form-field>
+                <div fxFlex="4%"></div>
+                <mat-form-field id="canvas-height-field">
+                    <mat-label class="form-label">
+                        Height ({{minCanvasHeight}}-{{maxCanvasHeight}})
+                    </mat-label>
+                    <input matInput type="number" name="height" [(ngModel)]="resizeForm.height" #height="ngModel">
+                </mat-form-field>
+                <div fxFlex="4%"></div>
+                <button color="primary" mat-raised-button id="resize-button" type="submit"
+                    [disabled]="startButtonDisable">
+                    <span matTooltip="Resize this spiral" matTooltipPosition="above" class="inline">
+                        RESIZE
+                    </span>
+                </button>
+
+
+            </div>
+        </form>
+
+        <div fxFlex="4%" fxFlex.lt-sm="0%" fxFlex.gt-sm="4%"></div>
+
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit('search')" #f="ngForm" novalidate fxFlex="36%"
+            fxFlex.lt-sm="100%" fxFlex.gt-sm="36%">
+            <div>
+                <mat-form-field id="spiral-id-field">
+                    <mat-label class="form-label">
+                        Spiral ID ({{minTokenID}}-{{maxTokenID}})
+                    </mat-label>
+                    <input matInput type="number" name="search" [(ngModel)]="searchForm.spiralID" #search="ngModel">
+                    <div class="form-error" role="alert" *ngIf="searchFail">
+                        Fail to obtain spiral details. The server might be temporarily unavailable.
+                    </div>
+                </mat-form-field>
+                <div fxFlex="6.8%"></div>
+                <button color="accent" mat-raised-button id="search-button" type="submit"
+                    [disabled]="startButtonDisable">
+                    <span matTooltip="Search the spiral by ID" matTooltipPosition="above" class="inline">
+                        SEARCH
+                    </span>
+                </button>
+
+
+            </div>
+        </form>
+
+    </div>
+
+    <br>
+    <br>
+
+    <form name="form" fxLayout="row wrap" fxlayoutalign="center" (ngSubmit)="f.form.valid && onSubmit('options')"
+        #f="ngForm" novalidate>
+        <div>
+            <mat-form-field id="gif-duration-field" fxFlex="20%" fxFlex.lt-sm="40%" fxFlex.gt-sm="20%">
+                <mat-label class="form-label">
+                    GIF Duration ({{minDuration}}-{{maxDuration}})
+                </mat-label>
+                <input matInput type="number" name="duration" [(ngModel)]="optionsForm.durationSec" #duration="ngModel">
+            </mat-form-field>
+
+            <div fxFlex="3%" fxFlex.lt-sm="20%" fxFlex.gt-sm="3%"></div>
+
+            <mat-form-field id="gif-scale-field" fxFlex="20%" fxFlex.lt-sm="40%" fxFlex.gt-sm="20%">
+                <mat-label class="form-label">
+                    GIF Scale ({{minScale}}-{{maxScale}})
+                </mat-label>
+                <input matInput type="number" name="scale" [(ngModel)]="optionsForm.scale" #scale="ngModel">
+            </mat-form-field>
+
+            <div fxFlex="3%" fxFlex.lt-sm="0%" fxFlex.gt-sm="3%"></div>
+
+            <mat-form-field id="gif-fps-field" fxFlex="20%" fxFlex.lt-sm="40%" fxFlex.gt-sm="20%">
+                <mat-label class="form-label">
+                    GIF FPS ({{minFPS}}-{{maxFPS}})
+                </mat-label>
+                <input matInput type="number" name="fps" [(ngModel)]="optionsForm.capturingFps" #fps="ngModel">
+            </mat-form-field>
+
+            <div fxFlex="3%" fxFlex.lt-sm="5%" fxFlex.gt-sm="3%"></div>
+
+            <mat-form-field id="gif-quality-field" fxFlex="20%" fxFlex.lt-sm="40%" fxFlex.gt-sm="20%">
+                <mat-label class="form-label">
+                    GIF Quality ({{minQuality}}-{{maxQuality}})
+                </mat-label>
+                <input matInput type="number" name="quality" [(ngModel)]="optionsForm.quality" #quality="ngModel">
+            </mat-form-field>
+
+            <div fxFlex="3%" fxFlex.lt-sm="5%" fxFlex.gt-sm="3%"></div>
+
+            <button color="primary" mat-raised-button id="apply-button" type="submit" [disabled]="startButtonDisable"
+                fxFlex="8%" fxFlex.lt-sm="10%" fxFlex.gt-sm="8%">
+                <span matTooltip="Apply GIF options" matTooltipPosition="above" class="inline">
+                    APPLY
+                </span>
+            </button>
+
+        </div>
+    </form>
+    <br>
+    <div>
+        <button mat-raised-button id="start-button" color="warn" fxFlex="100%" [disabled]="startButtonDisable">
+            <span matTooltip="Save this Spiral as GIF" matTooltipPosition="above" class="inline">
+                {{ startButtonText }}
+            </span>
+        </button>
+    </div>
+    <!--div>
+        <button mat-button id="download-button" color="primary" fxFlex="50%">
+            <span matTooltip="Download this Spiral as GIF" matTooltipPosition="above" class="inline">
+                DOWNLOAD
+            </span>
+        </button>
+    </div-->
+
+
+
+    <div id="preview-gif"></div>
+</mat-card-content>

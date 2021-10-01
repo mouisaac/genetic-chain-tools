@@ -1,0 +1,291 @@
+:host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+  
+  p {
+    margin: 0;
+  }
+  
+  .spacer {
+    flex: 1;
+  }
+  
+  #toggle-placeholder {
+    position: relative;
+    width: 50px;
+  }
+  
+  .toolbar {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .toolbar-title {
+    //white-space: wrap;
+    //overflow: hidden;
+    //float:left;
+    text-align: center;
+    position: relative;
+    margin: auto;
+    //display: block;
+  }
+  
+  .toolbar img {
+    margin: 0 16px;
+  }
+  
+  .toolbar #main-logo {
+    height: 40px;
+  }
+  
+  .toolbar #main-logo:hover {
+    opacity: 0.8;
+  }
+  
+  .scrolling-text {
+    //white-space: wrap;
+    //overflow: hidden;
+    //float:left;
+    text-align: center;
+    position: relative;
+    //display: block;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  svg.material-icons {
+    height: 24px;
+    width: auto;
+  }
+  
+  svg.material-icons:not(:last-child) {
+    margin-right: 8px;
+  }
+  
+  .card svg.material-icons path {
+    fill: #888;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card-container .card:not(:last-child) {
+    margin-right: 0;
+  }
+  
+  .card-container .card:not(.highlight-card) {
+    cursor: pointer;
+  }
+  
+  .card-container .card:not(.highlight-card):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+  }
+  
+  .card-container .card:not(.highlight-card):hover .material-icons path {
+    fill: rgb(105, 103, 103);
+  }
+  
+  #back-to-top-container {
+    margin: 20px auto 5px;
+  }
+  
+  a,
+  a:visited,
+  a:hover {
+    color: #1976d2;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #125699;
+  }
+  
+  .circle-link {
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    margin: 8px;
+    background-color: white;
+    border: 1px solid #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: 1s ease-out;
+  }
+  
+  .circle-link:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  ::ng-deep {
+    .label {
+      font-size: 20px;
+      margin-top: 60px;
+      flex-basis: 100%;
+    }
+  
+    .help-icon {
+      vertical-align: top;
+      line-height: inherit;
+    }
+  
+    /* 
+    this is to make mat-dialog responsive and allow scroll when
+    having small screen
+     */
+    .mat-dialog-container {
+      max-height: 95vh !important;
+    }
+  }
+  
+  mat-toolbar-row {
+    height: 20px !important;
+    margin: 20px 0;
+  }
+  
+  mat-toolbar-row .footer-link {
+    display: flex;
+    align-items: center;
+    color: rgb(122, 188, 230);
+  }
+  
+  mat-toolbar-row .footer-link:hover {
+    color: rgb(105, 163, 199);
+  }
+  
+  .footer {
+    font-size: 15px;
+  }
+  
+  @media only screen and (max-width: 500px) {
+    .footer {
+      font-size: 10px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+  
+    .scrolling-text {
+      font-size: 10px;
+    }
+  }
+  
+  .github-star-badge {
+    color: #24292e;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 3px 10px;
+    border: 1px solid rgba(27, 31, 35, 0.2);
+    border-radius: 3px;
+    background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
+    margin-left: 4px;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+      Segoe UI Emoji, Segoe UI Symbol;
+  }
+  
+  .github-star-badge:hover {
+    background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
+    border-color: rgba(27, 31, 35, 0.35);
+    background-position: -0.5em;
+  }
+  
+  .github-star-badge .material-icons {
+    height: 16px;
+    width: 16px;
+    margin-right: 4px;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .card-container > *:not(.circle-link) {
+      width: 100%;
+    }
+  }
+  
+  @-webkit-keyframes rotate {
+    from {
+      -webkit-transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .mou-logo:hover {
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 0.9s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-name: rotate;
+    animation-duration: 0.9s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  
+  .monospace {
+    font-family: monospace, monospace;
+  }
+  
+  .unselectable {
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    -o-user-select: none !important;
+    user-select: none !important;
+  }
+
+  
+  .version {
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #ffffff;
+  }
+  
+  .version-date {
+    font-size: 10px;
+    text-shadow: 0 0 3px #d6c5c5;
+  }
+  
