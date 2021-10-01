@@ -1,0 +1,12 @@
+**/__pycache__/**
+**.vscode**
+._*
+*.code-workspace
+**/.DS_Store
+venv/
+**/.env
+**.key
+**.crt
+**/static/
+**/.log
+**/spiral-test/
