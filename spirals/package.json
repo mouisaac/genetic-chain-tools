@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-prebuild": "cd spirals",
+    "heroku-prebuild": "",
     "heroku-postbuild": "ng build --aot --prod --output-hashing none"
   },
   "private": true,
