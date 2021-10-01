@@ -271,7 +271,7 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
   };
 
   searchForm: { [key: string]: string } = {
-    spiralID: '1933',
+    tokenID: '1933',
   };
 
   optionsForm: { [key: string]: string } = {

@@ -70,7 +70,7 @@
                     <mat-label class="form-label">
                         Spiral ID ({{minTokenID}}-{{maxTokenID}})
                     </mat-label>
-                    <input matInput type="number" name="search" [(ngModel)]="searchForm.spiralID" #search="ngModel">
+                    <input matInput type="number" name="search" [(ngModel)]="searchForm.tokenID" #search="ngModel">
                     <div class="form-error" role="alert" *ngIf="searchFail">
                         Fail to obtain spiral details. The server might be temporarily unavailable.
                     </div>
