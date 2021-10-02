@@ -236,8 +236,8 @@ const u64 = (a: any) => BigInt.asUintN(64, a),
   },
   sizeCanvas = (w = 0, h = 0) => {
     var a = Math.floor;
-    const b = w || window.innerWidth / 1.5,
-      c = h || window.innerHeight / 1.5,
+    const b = w || (window.innerWidth / 1.5).toFixed(2),
+      c = h || (window.innerHeight / 1.5).toFixed(2),
       d = window.devicePixelRatio,
       e = document.querySelector("#art-canvas");
     (e.width = a(b * d)), (e.height = a(c * d)), (e.style.width = b + "px"), (e.style.height = c + "px");
@@ -294,6 +294,13 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
     //isSmoothingEnabled: true
   }
 
+  spiralSpeed = 5;
+
+  onSpiralSpeedChange(value: number | null){
+    this.spiralSpeed = value;
+    if (value) tokenState.speed = value.toString();
+  }
+
   startButtonText = "START";
   startButtonDisable = null;
 
@@ -324,8 +331,8 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
 
   resetResizeForm() {
     this.resizeForm = {
-      width: window.innerWidth / 1.5,
-      height: window.innerHeight / 1.5
+      width: (window.innerWidth / 1.5).toFixed(2),
+      height: (window.innerHeight / 1.5).toFixed(2)
     };
     this.ref.markForCheck();
   }
@@ -457,8 +464,8 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
 
   resizeSpiral = (w: number = 0, h: number = 0) => {
     var a = Math.floor;
-    const b = w || window.innerWidth / 1.5,
-      c = h || window.innerHeight / 1.5,
+    const b = w || (window.innerWidth / 1.5).toFixed(2),
+      c = h || (window.innerHeight / 1.5).toFixed(2),
       d = window.devicePixelRatio,
       e = document.querySelector("#art-canvas");
     (e.width = a(b * d)), (e.height = a(c * d)), (e.style.width = b + "px"), (e.style.height = c + "px");
