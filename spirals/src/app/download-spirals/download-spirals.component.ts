@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetect
 import { SpinnerService } from '../_services/spinner.service';
 import * as gcc from './gif-capture-canvas';
 import { TokenService } from '../_services/token.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 // default spiral (an r7)
 let tokenData = {
@@ -219,6 +220,7 @@ const u64 = (a: any) => BigInt.asUintN(64, a),
       }),
       (a.loop = (b) => {
         if (removeCanvas) {
+          cancelAnimationFrame(a.loopId);
           return;
         }
         a.render(), (a.loopId = requestAnimationFrame(a.loop));
@@ -263,7 +265,12 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
     public spinner: SpinnerService,
     public tokenService: TokenService,
     public ref: ChangeDetectorRef,
+    private _snackBar: MatSnackBar,
   ) { }
+
+  openSnackBar(message: string = '', action: string = '', option: MatSnackBarConfig = {}) {
+    this._snackBar.open(message, action, option);
+  }
 
   resizeForm: { [key: string]: string } = {
     width: 0,
@@ -418,7 +425,7 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
     this.resetResizeForm();
     return;
     */
-
+    removeCanvas = true;
     this.tokenService.getMetadata(id).subscribe((data) => {
       //console.log(data);
       const metadata = JSON.parse(data);
@@ -447,14 +454,13 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
       this.resetResizeForm();
       this.updateCanvas();
     }, err => {
+      removeCanvas = false;
       console.log(err);
     })
   }
 
   updateCanvas() {
-    removeCanvas = true;
     let canvasContainer = document.getElementById('canvas-container');
-    //canvasContainer.removeChild(canvas);
     canvasContainer.textContent = '';
     run(tokenData, tokenState);
   }
@@ -541,6 +547,9 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
         // apply new options
         Object.assign(this.gccOptions, this.optionsForm);
         gcc.setOptions(this.gccOptions);
+        this.openSnackBar("Congigurations Updated!", 'OK', {
+          duration: 1000
+        })
         break;
       default:
         //this.spinner.hide();

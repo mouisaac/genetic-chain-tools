@@ -81,7 +81,6 @@ function begin(element: any) {
   if (isInfiniteDuration) {
     contexts = [];
   } else {
-    console.log(options.durationSec);
     contextsNum = <number>options.durationSec * <number>options.capturingFps;
     contexts = times(contextsNum, () => createContext(element));
     isCaptured = times(contextsNum, () => false);
