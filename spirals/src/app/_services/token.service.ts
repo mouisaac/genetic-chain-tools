@@ -13,6 +13,6 @@ export class TokenService {
   constructor(private http: HttpClient) { }
 
   getMetadata(id: number = 1): Observable<any> {
-    return this.http.get(`${SPIRAL_API_URL}token/${id}/meta`, httpOptions);
+    return this.http.get(`${SPIRAL_API_URL}token/${id}/meta`, { responseType: 'text' });
   }
 }

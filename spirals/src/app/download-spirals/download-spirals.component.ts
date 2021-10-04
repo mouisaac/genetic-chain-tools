@@ -420,12 +420,13 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
     */
 
     this.tokenService.getMetadata(id).subscribe((data) => {
+      //console.log(data);
       const metadata = JSON.parse(data);
       //console.log(metadata);
       tokenData.tokenId = id;
       tokenData.hash = metadata.tokenHash;
       tokenState = metadata.state;
-      let attrs = metadat.attributes;
+      let attrs = metadata.attributes;
       let algo = "", pallete = "", bg = "";
       for (var attr of attrs) {
         switch (attr.trait_type) {
@@ -444,7 +445,7 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
         algo, pallete, bg
       };
       this.resetResizeForm();
-
+      this.updateCanvas();
     }, err => {
       console.log(err);
     })
@@ -510,13 +511,11 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
         this.ref.markForCheck();
         break;
       case 'search':
-        this.updateCanvas();
         try {
           let tokenID = parseInt(this.searchForm.tokenID);
           if (tokenID < this.minTokenID) tokenID = this.minTokenID;
           if (tokenID > this.maxTokenID) tokenID = this.maxTokenID;
           this.updateTokenData(tokenID);
-          this.updateCanvas();
           this.searchFail = false;
           //this.spinner.hide();
         }
