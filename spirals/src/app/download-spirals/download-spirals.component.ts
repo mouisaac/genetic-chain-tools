@@ -229,23 +229,27 @@ const u64 = (a: any) => BigInt.asUintN(64, a),
       }),
       (a.loopId = requestAnimationFrame(a.loop));
   },
-  setupCanvas = () => {
+  setupCanvas = (w = 512, h = 512) => {
     const a = document.querySelector("#canvas-container"),
-      b = createCanvas("art-canvas");
+      b = createCanvas("art-canvas", w, h);
     // style has to be done inline to apply instantly (center the canvas inside canvas-container)
-    b.style.cssText = "padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; display: block;";
-    return a.appendChild(b), sizeCanvas(), b;
+    b.style.cssText = `padding-left: 0; padding-right: 0; margin-left: auto; margin-right: auto; width: ${w}px; height: ${h}px; display: block;`;
+    //return a.appendChild(b), sizeCanvas(w,h), b;
+    return a.appendChild(b), null, b;
   },
-  sizeCanvas = (w = 0, h = 0) => {
+  sizeCanvas = (w = 512, h = 512) => {
     var a = Math.floor;
-    const b = w || (window.innerWidth / 1.5).toFixed(2),
-      c = h || (window.innerHeight / 1.5).toFixed(2),
+    //const b = w || (window.innerWidth / 1.5).toFixed(2),
+    //  c = h || (window.innerHeight / 1.5).toFixed(2),
+    const b = w,
+      c = h,
       d = window.devicePixelRatio,
       e = document.querySelector("#art-canvas");
-    (e.width = a(b * d)), (e.height = a(c * d)), (e.style.width = b + "px"), (e.style.height = c + "px");
+    //(e.width = a(b * d)), (e.height = a(c * d)), (e.style.width = b + "px"), (e.style.height = c + "px");
+    (e.width = b), (e.height = c), (e.style.width = b + "px"), (e.style.height = c + "px");
   },
-  run = (a, b) => {
-    const c = setupCanvas();
+  run = (a, b, w = 512, h = 512) => {
+    const c = setupCanvas(w, h);
     removeCanvas = false;
     doSpiral(c, a.hash, b);
   };
@@ -273,8 +277,8 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
   }
 
   resizeForm: { [key: string]: string } = {
-    width: 0,
-    height: 0
+    width: 512,
+    height: 512
   };
 
   searchForm: { [key: string]: string } = {
@@ -303,7 +307,7 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
 
   spiralSpeed = 5;
 
-  onSpiralSpeedChange(value: number | null){
+  onSpiralSpeedChange(value: number | null) {
     this.spiralSpeed = value;
     if (value) tokenState.speed = value.toString();
   }
@@ -338,8 +342,10 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
 
   resetResizeForm() {
     this.resizeForm = {
-      width: (window.innerWidth / 1.5).toFixed(2),
-      height: (window.innerHeight / 1.5).toFixed(2)
+      //width: (window.innerWidth / 1.5).toFixed(2),
+      //height: (window.innerHeight / 1.5).toFixed(2)
+      width: 512,
+      height: 512
     };
     this.ref.markForCheck();
   }
@@ -459,10 +465,10 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
     })
   }
 
-  updateCanvas() {
+  updateCanvas(w = 512, h = 512) {
     let canvasContainer = document.getElementById('canvas-container');
     canvasContainer.textContent = '';
-    run(tokenData, tokenState);
+    run(tokenData, tokenState, w, h);
   }
 
   // for displaying error message on the form field
@@ -471,24 +477,27 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
 
   resizeSpiral = (w: number = 0, h: number = 0) => {
     var a = Math.floor;
-    const b = w || (window.innerWidth / 1.5).toFixed(2),
-      c = h || (window.innerHeight / 1.5).toFixed(2),
+    //const b = w || (window.innerWidth / 1.5).toFixed(2),
+    //  c = h || (window.innerHeight / 1.5).toFixed(2),
+    const b = w || 512,
+      c = h || 512,
       d = window.devicePixelRatio,
       e = document.querySelector("#art-canvas");
-    (e.width = a(b * d)), (e.height = a(c * d)), (e.style.width = b + "px"), (e.style.height = c + "px");
+    //(e.width = a(b * d)), (e.height = a(c * d)), (e.style.width = b + "px"), (e.style.height = c + "px");
+    (e.width = b), (e.height = c), (e.style.width = b + "px"), (e.style.height = c + "px");
   }
 
   // constraint constants
   minCanvasWidth = 1;
   minCanvasHeight = 1;
-  maxCanvasWidth = 4096;
-  maxCanvasHeight = 4096;
+  maxCanvasWidth = 2048;
+  maxCanvasHeight = 2048;
 
   minTokenID = 1;
   maxTokenID = 6305;
 
   minDuration = 0.1;
-  maxDuration = 60;
+  maxDuration = 30;
 
   minScale = 0.1;
   maxScale = 2;
@@ -509,12 +518,17 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
 
         if (w < this.minCanvasWidth) w = this.minCanvasWidth;
         if (w > this.maxCanvasWidth) w = this.maxCanvasWidth;
-        if (h < this.minCanvasHeight) w = this.minCanvasHeight;
-        if (h > this.maxCanvasHeight) w = this.maxCanvasHeight;
+        if (h < this.minCanvasHeight) h = this.minCanvasHeight;
+        if (h > this.maxCanvasHeight) h = this.maxCanvasHeight;
+        this.resizeForm = { width: w, height: h };
+        removeCanvas = true;
+        setTimeout(() => {
+          this.updateCanvas(w, h);
+          //sizeCanvas(w, h);
+          //this.spinner.hide();
+          this.ref.markForCheck();
+        }, 50);
 
-        sizeCanvas(w, h);
-        //this.spinner.hide();
-        this.ref.markForCheck();
         break;
       case 'search':
         try {
@@ -559,10 +573,12 @@ export class DownloadSpiralsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     run(tokenData, tokenState);
+    /*
     window.onresize = () => {
       this.resetResizeForm();
       sizeCanvas();
     };
+    */
   }
 
 
